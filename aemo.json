@@ -1,0 +1,268 @@
+{
+    "CNRGYP": {
+        "id": "CNRGYP",
+        "state": "Essential Energy",
+        "ranges": [
+            {
+                "from": "4001000000",
+                "to": "4001999999"
+            },
+            {
+                "from": "4508000000",
+                "to": "4508099999"
+            },
+            {
+                "from": "4204000000",
+                "to": "4204999999"
+            },
+            {
+                "from": "4407000000",
+                "to": "4407999999"
+            }
+        ]
+    },
+    "ENERGYAP": {
+        "id": "ENERGYAP",
+        "state": "Ausgrid",
+        "ranges": [
+            {
+                "from": "4102000000",
+                "to": "4104999999"
+            }
+        ]
+    },
+    "INTEGP": {
+        "id": "INTEGP",
+        "state": "Endeavour Energy",
+        "ranges": [
+            {
+                "from": "4310000000",
+                "to": "4319999999"
+            }
+        ]
+    },
+    "TRANSGP": {
+        "id": "TRANSGP",
+        "state": "TransGrid",
+        "ranges": [
+            {
+                "from": "4608100000",
+                "to": "4608108999"
+            }
+        ]
+    },
+    "PWCLNSP": {
+        "id": "PWCLNSP",
+        "state": "Power and Water Corporation",
+        "ranges": [
+            {
+                "from": "2500000000",
+                "to": "2502999999"
+            }
+        ]
+    },
+    "NTLNSP": {
+        "id": "NTLNSP",
+        "state": "Power and Water Corporation",
+        "ranges": [
+            {
+                "from": "2503000000",
+                "to": "2509999999"
+            }
+        ]
+    },
+    "ENERGEXP": {
+        "id": "ENERGEXP",
+        "state": "ENERGEX Limited",
+        "ranges": [
+            {
+                "from": "3100000000",
+                "to": "3199999999"
+            }
+        ]
+    },
+    "ERGONETP": {
+        "id": "ERGONETP",
+        "state": "Ergon Energy Corporation Limited",
+        "ranges": [
+            {
+                "from": "3000000000",
+                "to": "3099999999"
+            }
+        ]
+    },
+    "PLINKP": {
+        "id": "PLINKP",
+        "state": "",
+        "ranges": [
+            {
+                "from": "3202000000",
+                "to": "3202009999"
+            }
+        ]
+    },
+    "UMPLP": {
+        "id": "UMPLP",
+        "state": "SA Power Networks",
+        "ranges": [
+            {
+                "from": "2001000000",
+                "to": "2002999999"
+            }
+        ]
+    },
+    "ETSATP": {
+        "id": "ETSATP",
+        "state": "ElectraNet SA",
+        "ranges": [
+            {
+                "from": "2102000000",
+                "to": "2102009999"
+            }
+        ]
+    },
+    "AURORAP": {
+        "id": "AURORAP",
+        "state": "TasNetworks DNSP (formerly Aurora Energy)",
+        "ranges": [
+            {
+                "from": "8000000000",
+                "to": "8000999999"
+            },
+            {
+                "from": "8590200000",
+                "to": "8590399999"
+            }
+        ]
+    },
+    "CITIPP": {
+        "id": "CITIPP",
+        "state": "CitiPower Pty",
+        "ranges": [
+            {
+                "from": "6102000000",
+                "to": "6103999999"
+            }
+        ]
+    },
+    "EASTERN": {
+        "id": "EASTERN",
+        "state": "Ausnet Services DNSP",
+        "ranges": [
+            {
+                "from": "6305000000",
+                "to": "6306999999"
+            }
+        ]
+    },
+    "POWCP": {
+        "id": "POWCP",
+        "state": "Powercor Australia",
+        "ranges": [
+            {
+                "from": "6203000000",
+                "to": "6204999999"
+            }
+        ]
+    },
+    "SOLARISP": {
+        "id": "SOLARISP",
+        "state": "Jemena Electricity Networks (Vic) Ltd",
+        "ranges": [
+            {
+                "from": "6001000000",
+                "to": "6001999999"
+            }
+        ]
+    },
+    "UNITED": {
+        "id": "UNITED",
+        "state": "United Energy Distribution Pty Ltd",
+        "ranges": [
+            {
+                "from": "6407000000",
+                "to": "6408999999"
+            }
+        ]
+    },
+    "GPUPP": {
+        "id": "GPUPP",
+        "state": "",
+        "ranges": [
+            {
+                "from": "6509000000",
+                "to": "6509009999"
+            }
+        ]
+    },
+    "WA": {
+        "id": "WA",
+        "state": "Western Power",
+        "ranges": [
+            {
+                "from": "8001000000",
+                "to": "8020999999"
+            },
+            {
+                "from": "8021000000",
+                "to": "8021999999"
+            }
+        ]
+    },
+    "GAS": {
+        "id": "GAS",
+        "state": "NSW Gas NMIs (& ACT)",
+        "ranges": [
+            {
+                "from": "5200000000",
+                "to": "5299999999"
+            },
+            {
+                "from": "5300000000",
+                "to": "5399999999"
+            },
+            {
+                "from": "5400000000",
+                "to": "5499999999"
+            },
+            {
+                "from": "5500000000",
+                "to": "5599999999"
+            },
+            {
+                "from": "5600000000",
+                "to": "5699999999"
+            },
+            {
+                "from": "5700000000",
+                "to": "5799999999"
+            },
+            {
+                "from": "7102000001",
+                "to": "7102999999"
+            },
+            {
+                "from": "7105000000",
+                "to": "7106999999"
+            },
+            {
+                "from": "8801000000",
+                "to": "8805999999"
+            },
+            {
+                "from": "9000000000",
+                "to": "9999999999"
+            }
+        ]
+    },
+    "ACTEWP": {
+        "id": "ACTEWP",
+        "state": "Icon Distribution Investments Limited and Jemena Networks",
+        "ranges": [
+            {
+                "from": "7001000000",
+                "to": "7001999999"
+            }
+        ]
+    }
+}
