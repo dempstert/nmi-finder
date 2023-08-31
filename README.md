@@ -17,7 +17,7 @@ The primary method for checking NMIs is `process_input`, which can take either a
 
 ### Example:
 
-<b>NOTE</b>: We have used NMIs directly in this example but `process_input` method is capable to process OCR output of bills in the form of string datatype, it can search for NMI and run it through all the processes.  
+<b style="color:red;">NOTE</b>: <i> We have used NMIs directly in this example but `process_input` method is capable to process OCR output of bills in the form of string datatype, it can search for NMI and run it through all the processes. </i>
   
 
 
