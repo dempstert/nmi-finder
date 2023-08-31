@@ -4,8 +4,8 @@ from itertools import chain
 
 
 class RangeChecker:
-    def __init__(self, json_file_path):
-        with open(json_file_path) as json_file:
+    def __init__(self):
+        with open("separated_data.json") as json_file:
             self.data = json.load(json_file)
 
         self.checker = NmiChecker()
@@ -141,11 +141,11 @@ class NmiChecker:
 if __name__ == "__main__":
 
     # Loading class and checking text output
-    range_checker = RangeChecker('separated_data.json')
+    range_checker = RangeChecker()
 
     test_strings = ["2501000000", "QB05414270",
                     "QB09999999", "12345", "QB0A999999"]
 
-    results = range_checker.process_input("12132")
+    results = range_checker.process_input("QB05414270")
 
     print(results)
