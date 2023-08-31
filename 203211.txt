@@ -11,17 +11,10 @@ ABN 42 636 908 220
 
 Account Enquiries
 
-
-
-
-
-
 Pie Town Pty Ltd
 450 Nicholson Street
 Fitzroy North
 VIC 3068
-
-
 
 Electricity Account
 Previous
@@ -30,19 +23,14 @@ Amount
 Payments
 Received
 
-
 
 $1,572.59
 
 $1,572.59 CR
 
-
-
 
 Opening
 Balance
-
-
 
 $6.29
 
@@ -67,8 +55,6 @@ Faults & Emergencies
 Call Energex 24 hours on 13 62 62
 
 Invoice Summary
-
-
 
 Amount Due
 
@@ -400,12 +386,6 @@ team at 1300 70 70 42.
 
 Interpreter Service 13 14 50
 
-Servicio Interpreti
-servicio de interpretacio
-Dịch vụ phiên dịch
-‫ﺧﺪﻣﺎﺕ ﺍﻟﺘﺮﺟﻤﺔ ﺍﻟﺸﻔﻮﻳﺔ‬
-διερμηνέα υπηρεσίες
-
 Nov 22
 
 Oct 22
@@ -470,5 +450,3 @@ Nov 21
 Total Usage (kWh)
 
 6
-
-
