@@ -138,12 +138,14 @@ class NmiChecker:
         return self.check_string_in_ranges(output)
 
 
-# Loading class and checking text output
-range_checker = RangeChecker('separated_data.json')
+if __name__ == "__main__":
 
-test_strings = ["2501000000", "QB05414270",
-                "QB09999999", "12345", "QB0A999999"]
+    # Loading class and checking text output
+    range_checker = RangeChecker('separated_data.json')
 
-results = range_checker.process_input("12132")
+    test_strings = ["2501000000", "QB05414270",
+                    "QB09999999", "12345", "QB0A999999"]
 
-print(results)
+    results = range_checker.process_input("12132")
+
+    print(results)

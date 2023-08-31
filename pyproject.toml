@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[tool.poetry]
+name = "nmi-checker"
+version = "1.0.0"
+description = "This package takes text as an input and checks for NMI in that text"
+authors = ["Akhlaq Ahmed engr.akhlaq@hotmail.com"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
