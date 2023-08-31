@@ -4,8 +4,8 @@ from itertools import chain
 
 
 class RangeChecker:
-    def __init__(self):
-        with open("separated_data.json") as json_file:
+    def __init__(self, json_name="separated_data.json"):
+        with open(json_name) as json_file:
             self.data = json.load(json_file)
 
         self.checker = NmiChecker()
@@ -52,8 +52,8 @@ class RangeChecker:
     def process_input(self, input_data):
         # If it's a single string, return the tuple
 
-        if isinstance(input_data, str):
-            output, result = self.checker.compare_checksum(input_data)
+        if any(isinstance(input_data, t) for t in [str, int]):
+            output, result = self.checker.compare_checksum(str(input_data))
             return self.check_string_in_ranges(output)
         # If it's a list of strings, return the list of tuples
         elif isinstance(input_data, list):
