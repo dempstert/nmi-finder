@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 
 [tool.poetry]
 name = "nmi-checker"
-version = "3.0.0"
+version = "4.0.0"
 description = "This package takes text as an input and checks for NMI in that text"
 authors = ["Akhlaq Ahmed engr.akhlaq@hotmail.com"]
 
