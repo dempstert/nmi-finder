@@ -11,3 +11,4 @@ authors = ["Akhlaq Ahmed engr.akhlaq@hotmail.com"]
 python = "^3.7"
 
 [tool.poetry.dev-dependencies]
+include = ["seperated_data.json"]
