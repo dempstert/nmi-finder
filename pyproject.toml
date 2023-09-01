@@ -14,4 +14,4 @@ include = ["seperated_data.json"]
 
 [tool.poetry.packages]
 name = "nmi_checker"
-include = ["nmi_checker/separated_data.json"]
+include = ["MANIFEST.in"]
