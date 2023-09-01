@@ -24,7 +24,7 @@ The primary method for checking NMIs is `process_input`, which can take either a
 1. Using a list of strings:
 
 ```python
-from nmi_checker import RangeChecker
+from nmi_class import RangeChecker
 
 range_checker = RangeChecker()
 test_strings = ["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"]

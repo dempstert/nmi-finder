@@ -2,14 +2,11 @@ import re
 import json
 from itertools import chain
 
-import pkg_resources
-
 
 class RangeChecker:
     def __init__(self, json_name="separated_data.json"):
-        data_path = pkg_resources.resource_filename(
-            'nmi_checker', json_name)
-        with open(data_path, 'r') as json_file:
+
+        with open(json_name, 'r') as json_file:
             self.data = json.load(json_file)
 
         self.checker = NmiChecker()
