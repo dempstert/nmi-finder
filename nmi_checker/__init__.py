@@ -1,1 +1,1 @@
-from nmi_checker import RangeChecker
+from nmi_class import RangeChecker
