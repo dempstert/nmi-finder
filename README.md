@@ -24,7 +24,10 @@ The primary method for checking NMIs is `process_input`, which can take either a
 1. Using a list of strings:
 
 ```python
-from nmi_class import RangeChecker
+from nmi_checker import RangeChecker
+r = RangeChecker()
+results = r.process_input('123')
+print(results)
 
 range_checker = RangeChecker()
 test_strings = ["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"]
@@ -34,6 +37,7 @@ print(results)
 
 Output:
 ```
+NMI not found in text
 [(('2501000000', 'PWCLNSP'), True), (('QB05414270', 'ENERGEXP'), True), (('QB09999999', 'ENERGEXP'), True), (None, False), (None, False)]
 ```
 
