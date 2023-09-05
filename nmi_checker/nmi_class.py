@@ -6,12 +6,11 @@ import pkg_resources
 __JSON_CONFIG_FILE__ = "nmi_ranges.json"
 
 
-
 class RangeChecker:
     def __init__(self, json_name=None):
 
         if json_name is None:
-            json_name = pkg_resources.resource_filename(
+            self.data = pkg_resources.resource_filename(
                 __name__, __JSON_CONFIG_FILE__)
         else:
             with open(json_name, 'r') as json_file:
