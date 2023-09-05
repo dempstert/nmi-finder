@@ -10,11 +10,14 @@ class RangeChecker:
     def __init__(self, json_name=None):
 
         if json_name is None:
-            self.data = pkg_resources.resource_filename(
+            print("Loading JSON from package")
+            self.json_name = pkg_resources.resource_filename(
                 __name__, __JSON_CONFIG_FILE__)
         else:
-            with open(json_name, 'r') as json_file:
-                self.data = json.load(json_file)
+            self.json_name = json_name
+
+        with open(self.json_name, 'r') as json_file:
+            self.data = json.load(json_file)
 
         self.checker = NmiChecker()
 
