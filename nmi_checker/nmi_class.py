@@ -3,7 +3,7 @@ import json
 from itertools import chain
 import pkg_resources
 
-__JSON_CONFIG_FILE__ = "nmi_ranges.json"
+__JSON_CONFIG_FILE__ = "separated_data.json"
 
 
 class RangeChecker:
