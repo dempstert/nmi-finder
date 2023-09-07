@@ -8,15 +8,15 @@ __JSON_CONFIG_FILE__ = "separated_data.json"
 
 class RangeChecker:
     def __init__(self, json_name=None):
-
         if json_name is None:
             print("Loading JSON from package")
             self.json_name = pkg_resources.resource_filename(
-                __name__, __JSON_CONFIG_FILE__)
+                __name__, __JSON_CONFIG_FILE__
+            )
         else:
             self.json_name = json_name
 
-        with open(self.json_name, 'r') as json_file:
+        with open(self.json_name, "r") as json_file:
             self.data = json.load(json_file)
 
         self.checker = NmiChecker()
@@ -74,21 +74,19 @@ class RangeChecker:
                 results.append(self.check_string_in_ranges(output))
             return results
         else:
-            raise ValueError(
-                "Input data must be either a string or a list of strings")
+            raise ValueError("Input data must be either a string or a list of strings")
 
 
 class NmiChecker:
-
     @staticmethod
     def load_string_from_file(filename):
         try:
-            with open(filename, 'r') as file:
+            with open(filename, "r") as file:
                 content = file.read()
-                content = content.replace('\n', ' ')
-                clean_string = ' '.join(content.split())
+                content = content.replace("\n", " ")
+                clean_string = " ".join(content.split())
                 clean_string = clean_string.strip()
-                clean_string = str(re.sub('\W+', ' ', clean_string))
+                clean_string = str(re.sub("\W+", " ", clean_string))
                 return clean_string
         except FileNotFoundError:
             print(f"The file '{filename}' was not found.")
@@ -101,9 +99,10 @@ class NmiChecker:
         if len(nmi) > 10:
             nmi = nmi[0:10]
         ascii_values = chain(
-            map(lambda x: ord(x) * 2, nmi[-1::-2]), map(lambda x: ord(x), nmi[-2::-2]))
-        ascii_digits = ''.join(map(lambda x: str(x), ascii_values))
-        digits = map(lambda x: ord(x) - ord('0'), ascii_digits)
+            map(lambda x: ord(x) * 2, nmi[-1::-2]), map(lambda x: ord(x), nmi[-2::-2])
+        )
+        ascii_digits = "".join(map(lambda x: str(x), ascii_values))
+        digits = map(lambda x: ord(x) - ord("0"), ascii_digits)
         reduction = sum(digits)
         return (10 - (reduction % 10)) % 10
 
@@ -114,14 +113,12 @@ class NmiChecker:
         -> [A-HJ-NP-Z0-9]*: Matches zero or more uppercase letters and digits (excluding 'O' and 'I')
         -> {10,11} string should be 10 or 11 characters long
         """
-        pattern = r'\b(?=[A-HJ-NP-Z0-9]*[0-9])[A-HJ-NP-Z0-9]{10,11}\b'
+        pattern = r"\b(?=[A-HJ-NP-Z0-9]*[0-9])[A-HJ-NP-Z0-9]{10,11}\b"
         match = re.search(pattern, text)
         if match:
             found_string = match.group()
-            if 'O' not in found_string and 'I' not in found_string:
-                print(f"String found {found_string}")
+            if "O" not in found_string and "I" not in found_string:
                 return found_string, True
-        print("NMI not found in text")
         return None, False
 
     def compare_checksum(self, text):
@@ -137,7 +134,8 @@ class NmiChecker:
                 return result, True
             else:
                 print(
-                    f"Checksum failed for string {result} and generated_digit {generated_digit}")
+                    f"Checksum failed for string {result} and generated_digit {generated_digit}"
+                )
                 return None, False
         return None, False
 
@@ -150,12 +148,10 @@ class NmiChecker:
 
 
 if __name__ == "__main__":
-
     # Loading class and checking text output
     range_checker = RangeChecker()
 
-    test_strings = ["2501000000", "QB05414270",
-                    "QB09999999", "12345", "QB0A999999"]
+    test_strings = ["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"]
 
     results = range_checker.process_input("QB05414270")
 
