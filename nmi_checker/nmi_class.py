@@ -126,7 +126,7 @@ class NmiChecker:
         if found:
             generated_digit = self.generate(result)
             last_character = ord(result[-1])
-            if len(result) > 10 and generated_digit == last_character:
+            if len(result) > 10 and ord(generated_digit) == last_character:
                 print(f"Checksum passed for {result[:10]}")
                 return result[:10], True
             elif len(result) == 10:
