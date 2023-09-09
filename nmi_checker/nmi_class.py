@@ -125,8 +125,12 @@ class NmiChecker:
         result, found = self.find_special_string(text)
         if found:
             generated_digit = self.generate(result)
-            last_character = ord(result[-1])
-            if len(result) > 10 and ord(generated_digit) == last_character:
+            if isinstance(generated_digit, str):
+                generated_digit = ord(generated_digit)  # Convert to int
+            last_character = result[-1]
+            if isinstance(last_character, str):
+                last_character = ord(last_character)
+            if len(result) > 10 and generated_digit == last_character:
                 print(f"Checksum passed for {result[:10]}")
                 return result[:10], True
             elif len(result) == 10:
