@@ -91,8 +91,11 @@ This method converts the result of `process_input` into a DataFrame.
 
 **Usage**:
 ```python
+
+r = RangeChecker()
 result = r.process_input(["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"])
 out_df = r.to_df()
+
 ```
 `out_df` now contains the output dataframe.
 
@@ -101,8 +104,11 @@ This method saves the result of `process_input` to a CSV file. It requires a fil
 
 **Usage**:
 ```python
+
+r = RangeChecker()
 result = r.process_input(["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"])
 r.to_csv("csv_fun_check.csv")
+
 ```
 This will generate a CSV file named `csv_fun_check.csv`.
 
