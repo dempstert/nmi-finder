@@ -1,11 +1,26 @@
 import re
 import json
 from itertools import chain
+import pandas as pd
+import pkg_resources
+
+__JSON_CONFIG_FILE__ = "separated_data.json"
 
 
 class RangeChecker:
-    def __init__(self, json_name="separated_data.json"):
-        with open(json_name) as json_file:
+    def __init__(self, json_name=None):
+
+        self.is_list = False
+        self.csv_output = []
+
+        if json_name is None:
+            print("Loading JSON from package")
+            self.json_name = pkg_resources.resource_filename(
+                __name__, __JSON_CONFIG_FILE__)
+        else:
+            self.json_name = json_name
+
+        with open(self.json_name, 'r') as json_file:
             self.data = json.load(json_file)
 
         self.checker = NmiChecker()
@@ -41,30 +56,86 @@ class RangeChecker:
                     return ((s, alphanumeric_data[key]["id"]), True)
         return (None, False)
 
-    def check_string_in_ranges(self, s):
+    def check_string_in_ranges(self, s, original_nmi):
         if not s:
-            return (None, False)
+            return {
+                "original": original_nmi,
+                "output": (None, False)
+            }
         if s.isnumeric():
-            return self.lies_in_numeric_range(s, self.data["numeric"])
+            return {
+                "original": original_nmi,
+                "output": self.lies_in_numeric_range(s, self.data["numeric"])
+            }
         else:
-            return self.lies_in_alphanumeric_ranges(s, self.data["alphanumeric"])
+            return {"original": original_nmi, "output": self.lies_in_alphanumeric_ranges(s, self.data["alphanumeric"])}
+
+    def generate_reason_and_results(self, nmi, found_status):
+        reason = "NMI not found" if not found_status else ""
+        output, result = self.checker.compare_checksum(nmi, found_status)
+        reason = "Checksum Failed" if not found_status else ""
+        range_out = self.check_string_in_ranges(output, nmi)
+        reason = "Not in given Ranges of AEMO" if not range_out[
+            "output"][1] else "NMI Found, Checksum Passed, Found in Range"
+        range_out["reason"] = reason
+        return range_out
 
     def process_input(self, input_data):
         # If it's a single string, return the tuple
 
         if any(isinstance(input_data, t) for t in [str, int]):
-            output, result = self.checker.compare_checksum(str(input_data))
-            return self.check_string_in_ranges(output)
+            self.is_list = False
+            reason = ""
+            nmi, found_status = self.checker.find_special_string(
+                str(input_data))
+
+            return self.generate_reason_and_results(nmi, found_status)
         # If it's a list of strings, return the list of tuples
         elif isinstance(input_data, list):
-            results = []
+            self.is_list = True
+            self.csv_output = []
             for s in input_data:
-                output, result = self.checker.compare_checksum(s)
-                results.append(self.check_string_in_ranges(output))
-            return results
+                nmi, found_status = self.checker.find_special_string(str(s))
+                self.csv_output.append(
+                    self.generate_reason_and_results(nmi, found_status))
+            return self.csv_output
         else:
             raise ValueError(
                 "Input data must be either a string or a list of strings")
+
+    def to_df(self):
+
+        if not self.is_list:
+            raise ValueError(
+                "Input data must be list of strings to get output as Pandas DataFrame")
+
+        data = {
+            'NMI': [],
+            'modified_nmi': [],
+            'State': [],
+            'Result': [],
+            'Remarks': []
+        }
+
+        for item in self.csv_output:
+            data['NMI'].append(item["original"] if item["original"] else None)
+            data['modified_nmi'].append(
+                item["output"][0][0] if item["output"][1] else None)
+            data['State'].append(item["output"][0][1]
+                                 if item["output"][1] else None)
+            data['Result'].append(item["output"][1])
+            data['Remarks'].append(item["reason"])
+
+        # Create and save the DataFrame directly
+        return pd.DataFrame(data)
+
+    def to_csv(self, filename):
+
+        if not self.is_list:
+            raise ValueError(
+                "Input data must be list of strings to get output as CSV")
+
+        self.to_df().to_csv(filename, index=False)
 
 
 class NmiChecker:
@@ -103,6 +174,10 @@ class NmiChecker:
         -> [A-HJ-NP-Z0-9]*: Matches zero or more uppercase letters and digits (excluding 'O' and 'I')
         -> {10,11} string should be 10 or 11 characters long
         """
+
+        if not text:
+            return None, False
+
         pattern = r'\b(?=[A-HJ-NP-Z0-9]*[0-9])[A-HJ-NP-Z0-9]{10,11}\b'
         match = re.search(pattern, text)
         if match:
@@ -113,9 +188,14 @@ class NmiChecker:
         print("NMI not found in text")
         return None, False
 
-    def compare_checksum(self, text):
-        result, found = self.find_special_string(text)
-        if found:
+    def compare_checksum(self, result, found):
+
+        if found and result:
+            if not result[-1].isnumeric():
+                print(f"{result} Last character is not a numeric ")
+                char = str(ord(result[-1]))
+                result = result[:-1] + char
+                print(f"New NMI after replacing {result}")
             generated_digit = self.generate(result)
             last_character = int(result[-1])
             if len(result) > 10 and generated_digit == last_character:
@@ -131,7 +211,8 @@ class NmiChecker:
         return None, False
 
     def check(self, text):
-        output, result = self.compare_checksum(text)
+        nmi, found_status = self.find_special_string(text)
+        output, result = self.compare_checksum(nmi, found_status)
         if not result:
             return None, False
         # numeric_data = ''.join(filter(str.isdigit, output))

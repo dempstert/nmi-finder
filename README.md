@@ -1,8 +1,4 @@
 
-# NMI Checker
-
-The NMI Checker is a Python package that checks for Network Metering Identifiers (NMI) within a given text. The package verifies whether the provided NMIs fall within valid ranges as specified in the [NMI Allocation List](https://aemo.com.au/-/media/files/electricity/nem/retail_and_metering/metering-procedures/nmi-allocation-list.pdf?la=en).
-
 ## Installation
 
 You can install the NMI Checker package directly from GitHub using the following command:
@@ -24,7 +20,10 @@ The primary method for checking NMIs is `process_input`, which can take either a
 1. Using a list of strings:
 
 ```python
-from nmi_class import RangeChecker
+from nmi_checker import RangeChecker
+r = RangeChecker()
+results = r.process_input('123')
+print(results)
 
 range_checker = RangeChecker()
 test_strings = ["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"]
@@ -33,35 +32,80 @@ print(results)
 ```
 
 Output:
+
 ```
-[(('2501000000', 'PWCLNSP'), True), (('QB05414270', 'ENERGEXP'), True), (('QB09999999', 'ENERGEXP'), True), (None, False), (None, False)]
+
+[
+ {'original': '2501000000',
+  'output': (('2501000000', 'PWCLNSP'), True),
+  'reason': 'NMI Found, Checksum Passed, Found in Range'},
+ {'original': 'QB05414270',
+  'output': 
+{
+ 'original': '2501000000',
+ 'output': (('2501000000', 'PWCLNSP'), True),
+ 'reason': 'NMI Found, Checksum Passed, Found in Range'
+}
+,
+  'reason': 'NMI Found, Checksum Passed, Found in Range'},
+ {'original': 'QB09999999',
+  'output': (('QB09999999', 'ENERGEXP'), True),
+  'reason': 'NMI Found, Checksum Passed, Found in Range'},
+ {'original': None,
+  'output': (None, False),
+  'reason': 'Not in given Ranges of AEMO'},
+ {'original': 'QB0A999999',
+  'output': (None, False),
+  'reason': 'Not in given Ranges of AEMO'}
+]
+
 ```
 
 2. Using a single string:
 
 ```python
-result = range_checker.process_input("QB05414270")
+result = range_checker.process_input("2501000000")
 print(result)
 ```
 
 Output:
 ```
-(('QB05414270', 'ENERGEXP'), True)
+
+{
+ 'original': '2501000000',
+ 'output': (('2501000000', 'PWCLNSP'), True),
+ 'reason': 'NMI Found, Checksum Passed, Found in Range'
+}
+
 ```
 
-#### Output Explanation:
 
-The output is a list of tuples (for list input) or a single tuple (for string input). Each tuple contains:
-- Another tuple with the provided NMI and its corresponding identifier.
-- A boolean value indicating whether the NMI was found within the valid range.
+### New Methods in `RangeChecker` class:
 
-For instance, the output `(('QB05414270', 'ENERGEXP'), True)` indicates that the NMI "QB05414270" corresponds to the identifier "ENERGEXP" and is within a valid range.
+There are two new methods added to the `RangeChecker` class: `to_df` and `to_csv`.
 
-The package is also capable of processing entire text blobs and searching for valid NMIs within them.
+<b style="color:red;">NOTE</b> : The `to_df` and `to_csv` methods can only be called when the input to `process_input` is a list of strings. 
 
-## References
+#### `to_df`:
+This method converts the result of `process_input` into a DataFrame. 
 
-This package checks the NMI ranges as per the [NMI Allocation List](https://aemo.com.au/-/media/files/electricity/nem/retail_and_metering/metering-procedures/nmi-allocation-list.pdf?la=en).
+**Usage**:
+```python
+result = r.process_input(["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"])
+out_df = r.to_df()
+```
+`out_df` now contains the output dataframe.
+
+#### `to_csv`:
+This method saves the result of `process_input` to a CSV file. It requires a filename as an argument.
+
+**Usage**:
+```python
+result = r.process_input(["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"])
+r.to_csv("csv_fun_check.csv")
+```
+This will generate a CSV file named `csv_fun_check.csv`.
+
 
 ## Author
 
