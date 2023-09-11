@@ -32,9 +32,33 @@ print(results)
 ```
 
 Output:
+
 ```
-NMI not found in text
-[(('2501000000', 'PWCLNSP'), True), (('2502000000', 'ENERGEXP'), True), (('2503000000', 'ENERGEXP'), True), (None, False), (None, False)]
+
+[
+ {'original': '2501000000',
+  'output': (('2501000000', 'PWCLNSP'), True),
+  'reason': 'NMI Found, Checksum Passed, Found in Range'},
+ {'original': 'QB05414270',
+  'output': 
+{
+ 'original': '2501000000',
+ 'output': (('2501000000', 'PWCLNSP'), True),
+ 'reason': 'NMI Found, Checksum Passed, Found in Range'
+}
+,
+  'reason': 'NMI Found, Checksum Passed, Found in Range'},
+ {'original': 'QB09999999',
+  'output': (('QB09999999', 'ENERGEXP'), True),
+  'reason': 'NMI Found, Checksum Passed, Found in Range'},
+ {'original': None,
+  'output': (None, False),
+  'reason': 'Not in given Ranges of AEMO'},
+ {'original': 'QB0A999999',
+  'output': (None, False),
+  'reason': 'Not in given Ranges of AEMO'}
+]
+
 ```
 
 2. Using a single string:
@@ -46,9 +70,47 @@ print(result)
 
 Output:
 ```
-(('QB05414270', 'ENERGEXP'), True)
+
+{
+ 'original': '2501000000',
+ 'output': (('2501000000', 'PWCLNSP'), True),
+ 'reason': 'NMI Found, Checksum Passed, Found in Range'
+}
+
 ```
 
+
+### New Methods in `RangeChecker` class:
+
+There are two new methods added to the `RangeChecker` class: `to_df` and `to_csv`.
+
+<b style="color:red;">NOTE</b> : The `to_df` and `to_csv` methods can only be called when the input to `process_input` is a list of strings. 
+
+#### `to_df`:
+This method converts the result of `process_input` into a DataFrame. 
+
+**Usage**:
+```python
+
+r = RangeChecker()
+result = r.process_input(["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"])
+out_df = r.to_df()
+
+```
+`out_df` now contains the output dataframe.
+
+#### `to_csv`:
+This method saves the result of `process_input` to a CSV file. It requires a filename as an argument.
+
+**Usage**:
+```python
+
+r = RangeChecker()
+result = r.process_input(["2501000000", "QB05414270", "QB09999999", "12345", "QB0A999999"])
+r.to_csv("csv_fun_check.csv")
+
+```
+This will generate a CSV file named `csv_fun_check.csv`.
 
 
 ## Author
