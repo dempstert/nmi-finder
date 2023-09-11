@@ -14,7 +14,6 @@ class RangeChecker:
         self.csv_output = []
 
         if json_name is None:
-            print("Loading JSON from package")
             self.json_name = pkg_resources.resource_filename(
                 __name__, __JSON_CONFIG_FILE__)
         else:
