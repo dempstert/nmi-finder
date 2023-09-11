@@ -197,6 +197,11 @@ class NmiChecker:
             if isinstance(generated_digit, str):
                 generated_digit = ord(generated_digit)  # Convert to int
             last_character = result[-1]
+            try:
+                # 0-9 can be converted to int() without ```ord()```
+                last_character = int(last_character)
+            except ValueError:
+                pass
             if isinstance(last_character, str):
                 last_character = ord(last_character)
             if len(result) > 10 and generated_digit == last_character:
