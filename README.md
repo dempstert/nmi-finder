@@ -112,7 +112,3 @@ r.to_csv("csv_fun_check.csv")
 ```
 This will generate a CSV file named `csv_fun_check.csv`.
 
-
-## Author
-
-- Akhlaq Ahmed
